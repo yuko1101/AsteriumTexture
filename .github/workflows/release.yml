@@ -13,11 +13,9 @@ jobs:
     - name: Create output dir
       run: mkdir output
     - name: Create full zip
-      run: zip -r ${{ github.ref_name }}-full ../texture
-      working-directory: ./output
+      run: zip -r ./output/${{ github.ref_name }}-full ./texture
     - name: Create lite zip
-      run: zip -r ${{ github.ref_name }}-lite ../texture -x ../texture/assets/minecraft/mcpatcher/*
-      working-directory: ./output
+      run: zip -r ./output/${{ github.ref_name }}-lite ./texture -x ./texture/assets/minecraft/mcpatcher/*
     - name: Create release
       id: create_release
       uses: actions/create-release@v1.0.0
