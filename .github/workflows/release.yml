@@ -15,9 +15,15 @@ jobs:
     - name: Create output dir
       run: mkdir output
     - name: Create full zip
-      run: zip -r ./output/full ./texture
+      run: |
+        cd ./texture
+        zip -r ../output/full *
+        cd ..
     - name: Create lite zip
-      run: zip -r ./output/lite ./texture -x "./*texture/assets/minecraft/mcpatcher/**/*"
+      run: |
+        cd ./texture
+        zip -r ../output/lite * -x "./*assets/minecraft/mcpatcher/**/*"
+        cd ..
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
