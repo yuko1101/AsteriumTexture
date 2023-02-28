@@ -15,37 +15,37 @@ jobs:
     - name: Create output dir
       run: mkdir output
     - name: Create full zip
-      run: zip -r ./output/${{ github.ref_name }}-full ./texture
+      run: zip -r ./output/full ./texture
     - name: Create lite zip
-      run: zip -r ./output/${{ github.ref_name }}-lite ./texture -x ./texture/assets/minecraft/mcpatcher/*
+      run: zip -r ./output/lite ./texture -x ./texture/assets/minecraft/mcpatcher/*
     - name: Create release
       id: create_release
-      uses: actions/create-release@v1.0.0
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ github.name }}
+        release_name: ${{ github.ref_name }}
         draft: false
         prerelease: false
     - name: Upload full zip
       id: upload-full-zip
-      uses: actions/upload-release-asset@v1.0.1
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./output/${{ github.ref_name }}-full.zip
+        asset_path: ./output/full.zip
         asset_name: Asterium-Full-${{ github.ref_name }}.zip
         asset_content_type: application/zip
     - name: Upload full zip
       id: upload-lite-zip
-      uses: actions/upload-release-asset@v1.0.1
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./output/${{ github.ref_name }}-lite.zip
+        asset_path: ./output/lite.zip
         asset_name: Asterium-Lite-${{ github.ref_name }}.zip
         asset_content_type: application/zip
     
