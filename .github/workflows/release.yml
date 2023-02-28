@@ -17,7 +17,7 @@ jobs:
     - name: Create full zip
       run: zip -r ./output/full ./texture
     - name: Create lite zip
-      run: zip -r ./output/lite ./texture -x "./texture/assets/minecraft/mcpatcher/**/\*"
+      run: zip -r ./output/lite ./texture -x "./texture/assets/minecraft/mcpatcher/\*\*/\*"
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
