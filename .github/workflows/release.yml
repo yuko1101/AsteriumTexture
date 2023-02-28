@@ -10,6 +10,8 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
     - name: Create output dir
       run: mkdir output
     - name: Create full zip
